@@ -6,10 +6,13 @@ import { Footer } from './components/footer';
 import { Content } from './components/content';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Navbar, Nav } from 'react-bootstrap';
-
+//imports of all the necessary items
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-
+//main class of the app. 
 class App extends Component {
+  //method where the methods of the other classes are called essentially.
+  //navbar is created here
+  //route to the other pages on the app are also here. 
   render() {
     return (
       <Router>
