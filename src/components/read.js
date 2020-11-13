@@ -11,12 +11,14 @@ export class Read extends React.Component {
     //get the data from the api
     //uses a catch try error 
     componentDidMount() {
-        axios.get('https://jsonblob.com/api/jsonblob/520c3b5e-0312-11eb-a6af-cbf00d776032')
+        //using axios, use a get method to retrieve the json data from the server. also add the new movie to the server
+        axios.get('http://localhost:4000/api/movies')
+        //response to the actions of the user
             .then((response) => {
-                this.setState({ movies: response.data.Search })
+                this.setState({ movies: response.data.movies })
             }
-
             )
+            //error should this fail
             .catch(
                 (error) => { console.log(error) }
             );

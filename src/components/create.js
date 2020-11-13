@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 //create class of the app
 export class Create extends React.Component {
     //create comoonent
@@ -35,6 +36,19 @@ export class Create extends React.Component {
         e.preventDefault();
         alert("Movie: " + this.state.Title + " " + this.state.Year + " " + this.state.Poster);
         console.log('test');
+        const newMovie = {
+            title: this.state.Title,
+            year: this.state.Year,
+            poster: this.state.Poster
+        }
+        //using the local host aka the server to retrieve the information
+        axios.post('http://localhost:4000/api/movies',newMovie)
+        .then((res)=>{
+            console.log(res);
+        })
+        .catch((err)=>{
+            console.log(err);
+        });
     }
     render() {
         return (
