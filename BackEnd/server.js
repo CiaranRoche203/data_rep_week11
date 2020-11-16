@@ -19,17 +19,19 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+//creating a new object that is a connection to the mongo database
 const myConnectionString = 'mongodb+srv://admin:Brotherhood23@cluster0.rchxg.mongodb.net/movies?retryWrites=true&w=majority';
+//this is how we connect to the database in question
 mongoose.connect(myConnectionString, { useNewUrlParser: true });
-
+//creating a new schema
 const Schema = mongoose.Schema;
-
+//assinging details that are to be stored in the schema
 var movieSchema = new Schema({
     title: String,
     year: String,
     poster: String
 });
-
+//creation of the database name
 var MovieModel = mongoose.model("movie", movieSchema);
 //get method to the main page
 app.get('/', (req, res) => {
@@ -54,6 +56,7 @@ app.get('/api/movies', (req, res) => {
     //         "Poster": "https://m.media-amazon.com/images/M/MV5BMjQ0MTgyNjAxMV5BMl5BanBnXkFtZTgwNjUzMDkyODE@._V1_SX300.jpg"
     //     }
     // ];
+    //return data to the user 
     MovieModel.find((err, data)=>{
         res.json(data);
     })
@@ -63,15 +66,18 @@ app.get('/api/movies', (req, res) => {
     //     movies: mymovies
     // });
 })
-//post method
-//movie receives new movie that has been added to the server. 
 //output is displayed on the server side( can be seen in the terminal )
+
+//this is the url where we can see individual movies based on the id
+//finds the id and returns the details
 app.get('/api/movies/:id', (req,res)=>{
     console.log(req.params.id);
     MovieModel.findById(req.params.id, (err, data)=>{
         res.json(data);
     })
 })
+//post method
+//movie receives new movie that has been added to the server. 
 app.post('/api/movies', (req, res) => {
     console.log('Movie Received!');
     console.log(req.body.title);
