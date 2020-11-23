@@ -10,6 +10,7 @@ import { Navbar, Nav } from 'react-bootstrap';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Create } from './components/create';
 import { Read } from './components/read';
+import { Edit } from './components/edit';
 //main class of the app. 
 class App extends Component {
   //method where the methods of the other classes are called essentially.
@@ -25,6 +26,7 @@ class App extends Component {
               <Nav.Link href="/">Home</Nav.Link>
               <Nav.Link href="/read">Read</Nav.Link>
               <Nav.Link href="/create">Create</Nav.Link>
+              <Nav.Link href="/edit">Edit</Nav.Link>
             </Nav>
           </Navbar>
           <br />
@@ -33,6 +35,7 @@ class App extends Component {
             <Route path='/' component={Content} exact />
             <Route path='/create' component={Create} exact />
             <Route path='/read' component={Read} exact />
+            <Route path='/edit/:id' component={Edit} exact />
           </Switch>
         </div>
       </Router>

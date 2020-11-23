@@ -76,6 +76,18 @@ app.get('/api/movies/:id', (req,res)=>{
         res.json(data);
     })
 })
+//put method, used to edit the movie
+app.put('/api/movies/:id', (req, res)=>{
+    console.log("Update movie: "+ req.params.id);
+    //pass up object containing new object. in other words update the document
+    console.log(req.body);
+    MovieModel.findByIdAndUpdate(req.params.id,req.body, {new:true}, 
+        (err,data)=>{
+            //sending back the data
+            res.send(data);
+        })
+
+})
 //post method
 //movie receives new movie that has been added to the server. 
 app.post('/api/movies', (req, res) => {
