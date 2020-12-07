@@ -5,6 +5,7 @@ const port = 4000
 const cors = require('cors');
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose');
+const path = require('path');
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 
@@ -19,6 +20,10 @@ app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+//essentially configuration so that we can access the build folder and deploy the app 
+app.use(express.static(path.join(__dirname, '../build')));
+//where to find static folder
+app.use('/static', express.static(path.join(__dirname, 'build//static')));
 //creating a new object that is a connection to the mongo database
 const myConnectionString = 'mongodb+srv://admin:Brotherhood23@cluster0.rchxg.mongodb.net/movies?retryWrites=true&w=majority';
 //this is how we connect to the database in question
@@ -110,6 +115,10 @@ app.post('/api/movies', (req, res) => {
         poster: req.body.poster
     })
     res.send('Item added');
+})
+//allows us to access all the files and links it to index.html
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname+'/../build/index.html'));
 })
 //listening at the port 4000 for the server
 app.listen(port, () => {
